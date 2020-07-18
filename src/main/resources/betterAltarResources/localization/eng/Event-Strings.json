@@ -2,10 +2,19 @@
   "betterAltar:BetterAltar": {
     "NAME": "Better Forgotten Altar",
     "DESCRIPTIONS": [
-      ""
+      "In front of you sits an altar to a forgotten god. NL Atop the altar sits an ornate female statue with arms outstretched. NL She calls out to you, demanding sacrifice.",
+      "As you gently set the idol onto the altar a #bcold wind swirls throughout the room. NL The arms of the statue begin to discolor and crumble. NL NL Your #ygolden #yidol begins to dull in color and begins bleeding from its eyes. NL The bleeding never ceases.",
+      "You stand on the altar and cut your wrists. NL As the #rblood spills out in sacrifice, the arms of the statue reach out and close around your eyes. NL Everything goes dark. NL You wake up a short time later feeling a new potential surging through you.",
+      "You lash out and smash the statue in front of you, breaking the magical hold the room had placed upon you. NL A dark wail echoes all around you, and you can feel the #p~cursed~ #p~magic~ seep into your bones."
     ],
     "OPTIONS": [
-      ""
+      "[Offer: Golden Idol] #gObtain #ga #gspecial #gRelic. #rLose #rGolden #rIdol.",
+      "[Locked] Requires: Golden Idol.",
+      "[Sacrifice] #gGain #g",
+      " #gMax #gHP. #rLose #r",
+      " #rHP.",
+      "[Locked] Requires: Humanity.",
+      "[Desecrate] #rBecome #rCursed #r- #rDecay."
     ]
   }
 }
