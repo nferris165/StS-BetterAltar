@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.curses.Decay;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -33,26 +32,28 @@ public class BetterAltarEvent extends AbstractImageEvent {
     private static final String DIALOG_2;
     private static final String DIALOG_3;
     private static final String DIALOG_4;
-    private int hpLoss;
+    private int maxHpLoss, hpGain, hpLoss;
     private String optionsChosen;
 
     public BetterAltarEvent() {
         super(NAME, DESCRIPTIONS[0], IMG);
 
+        if (AbstractDungeon.ascensionLevel >= 15) {
+            this.maxHpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.12F);
+            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.08F);
+        } else {
+            this.maxHpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.08F);
+            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.05F);
+        }
+
         if (AbstractDungeon.player.hasRelic("Golden Idol")) {
-            this.imageEventText.setDialogOption(OPTIONS[0], false, new BloodyIdol());
+            this.imageEventText.setDialogOption(OPTIONS[0] + this.hpLoss + OPTIONS[5], false, new BloodyIdol());
         } else {
             this.imageEventText.setDialogOption(OPTIONS[1], true, new BloodyIdol());
         }
 
-        if (AbstractDungeon.ascensionLevel >= 15) {
-            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.35F);
-        } else {
-            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.25F);
-        }
-
-        this.imageEventText.setDialogOption(OPTIONS[2] + 5 + OPTIONS[3] + this.hpLoss + OPTIONS[4]);
-        this.imageEventText.setDialogOption(OPTIONS[6], CardLibrary.getCopy("Decay"));
+        this.imageEventText.setDialogOption(OPTIONS[2] + this.hpGain + OPTIONS[3] + this.maxHpLoss + OPTIONS[4]);
+        this.imageEventText.setDialogOption(OPTIONS[6], CardLibrary.getCopy("Decay"), new BloodyIdol());
     }
 
     @Override
@@ -63,29 +64,34 @@ public class BetterAltarEvent extends AbstractImageEvent {
 
     }
     protected void buttonEffect(int buttonPressed) {
-        switch(this.screenNum) {// 74
+        switch(this.screenNum) {
             case 0:
-                switch(buttonPressed) {// 77
+                switch(buttonPressed) {
                     case 0:
                         //metric logged in function
-                        this.gainChalice();// 79
-                        this.showProceedScreen(DIALOG_2);// 80
-                        CardCrawlGame.sound.play("HEAL_1");// 81
-                        return;// 108
+                        this.gainChalice();
+                        this.showProceedScreen(DIALOG_2);
+                        AbstractDungeon.player.damage(new DamageInfo(null, this.hpLoss));
+                        CardCrawlGame.sound.play("HEAL_1");
+                        return;
                     case 1:
-                        AbstractDungeon.player.increaseMaxHp(5, false);// 84
-                        AbstractDungeon.player.damage(new DamageInfo((AbstractCreature)null, this.hpLoss));// 85
-                        CardCrawlGame.sound.play("HEAL_3");// 86
-                        this.showProceedScreen(DIALOG_3);// 87
-                        logMetricDamageAndMaxHPGain("Forgotten Altar", "Shed Blood", this.hpLoss, 5);// 88
+                        AbstractDungeon.player.decreaseMaxHealth(this.maxHpLoss);
+                        AbstractDungeon.player.heal(this.hpGain, true);
+                        CardCrawlGame.sound.play("HEAL_3");
+                        this.showProceedScreen(DIALOG_3);
+                        logMetricDamageAndMaxHPGain(ID, "Sacrifice", this.hpLoss, 5);
                         return;
                     case 2:
-                        CardCrawlGame.sound.play("BLUNT_HEAVY");// 91
-                        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.HIGH, ScreenShake.ShakeDur.MED, true);// 92
-                        AbstractCard curse = new Decay();// 93
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(curse, (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2)));// 94
-                        this.showProceedScreen(DIALOG_4);// 96
-                        logMetricObtainCard("Forgotten Altar", "Smashed Altar", curse);// 97
+                        CardCrawlGame.sound.play("BLUNT_HEAVY");
+                        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.HIGH, ScreenShake.ShakeDur.MED, true);
+                        AbstractCard curse = new Decay();
+                        AbstractRelic relic = new BloodyIdol();
+                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(curse, (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2)));
+                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2),
+                                (float)(Settings.HEIGHT / 2), relic);
+                        this.showProceedScreen(DIALOG_4);
+                        logMetricObtainCard(ID, "Desecrate", curse);
+                        logMetricObtainCardAndRelic(ID, "Desecrate", curse, relic);
                         return;
                     default:
                         return;

@@ -210,7 +210,7 @@ public class BetterAltar implements
                 .eventType(EventUtils.EventType.SHRINE).bonusCondition(
                         () -> {
                             if(AbstractDungeon.ascensionLevel >= 15){
-                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.3F;
+                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.25F;
                             } else{
                                 return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.3F;
                             }

@@ -8,13 +8,13 @@
       "You lash out and smash the statue in front of you, breaking the magical hold the room had placed upon you. NL A dark wail echoes all around you, and you can feel the #p~cursed~ #p~magic~ seep into your bones."
     ],
     "OPTIONS": [
-      "[Offer: Golden Idol] #gObtain #ga #gspecial #gRelic. #rLose #rGolden #rIdol.",
+      "[Offer: Golden Idol] #gObtain #ga #gspecial #gRelic. #rLose #rGolden #rIdol. #rLose ",
       "[Locked] Requires: Golden Idol.",
       "[Sacrifice] #gGain #g",
-      " #gMax #gHP. #rLose #r",
+      " #gHP. #rLose #r",
+      " #rMax #rHP.",
       " #rHP.",
-      "[Locked] Requires: Humanity.",
-      "[Desecrate] #rBecome #rCursed #r- #rDecay."
+      "[Desecrate] #gObtain #ga #gspecial #gRelic. #rBecome #rCursed #r- #rDecay."
     ]
   }
 }
