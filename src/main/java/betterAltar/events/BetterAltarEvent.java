@@ -30,7 +30,6 @@ public class BetterAltarEvent extends AbstractImageEvent {
     private static final String[] OPTIONS = eventStrings.OPTIONS;
     private static final String IMG = "images/events/forgottenAltar.jpg";
 
-    private static final String DIALOG_1;
     private static final String DIALOG_2;
     private static final String DIALOG_3;
     private static final String DIALOG_4;
@@ -40,19 +39,19 @@ public class BetterAltarEvent extends AbstractImageEvent {
     public BetterAltarEvent() {
         super(NAME, DESCRIPTIONS[0], IMG);
 
-        if (AbstractDungeon.player.hasRelic("Golden Idol")) {// 42
-            this.imageEventText.setDialogOption(OPTIONS[0], !AbstractDungeon.player.hasRelic("Golden Idol"), new BloodyIdol());// 43 45
+        if (AbstractDungeon.player.hasRelic("Golden Idol")) {
+            this.imageEventText.setDialogOption(OPTIONS[0], false, new BloodyIdol());
         } else {
-            this.imageEventText.setDialogOption(OPTIONS[1], !AbstractDungeon.player.hasRelic("Golden Idol"), new BloodyIdol());// 48 50
+            this.imageEventText.setDialogOption(OPTIONS[1], true, new BloodyIdol());
         }
 
-        if (AbstractDungeon.ascensionLevel >= 15) {// 54
-            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.35F);// 55
+        if (AbstractDungeon.ascensionLevel >= 15) {
+            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.35F);
         } else {
-            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.25F);// 57
+            this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.25F);
         }
 
-        this.imageEventText.setDialogOption(OPTIONS[2] + 5 + OPTIONS[3] + this.hpLoss + OPTIONS[4]);// 60
+        this.imageEventText.setDialogOption(OPTIONS[2] + 5 + OPTIONS[3] + this.hpLoss + OPTIONS[4]);
         this.imageEventText.setDialogOption(OPTIONS[6], CardLibrary.getCopy("Decay"));
     }
 
@@ -68,6 +67,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
             case 0:
                 switch(buttonPressed) {// 77
                     case 0:
+                        //metric logged in function
                         this.gainChalice();// 79
                         this.showProceedScreen(DIALOG_2);// 80
                         CardCrawlGame.sound.play("HEAL_1");// 81
@@ -96,29 +96,29 @@ public class BetterAltarEvent extends AbstractImageEvent {
     }
 
     public void gainChalice() {
-        int relicAtIndex = 0;// 111
+        int relicAtIndex = 0;
 
-        for(int i = 0; i < AbstractDungeon.player.relics.size(); ++i) {// 112
-            if (((AbstractRelic)AbstractDungeon.player.relics.get(i)).relicId.equals("Golden Idol")) {// 113
-                relicAtIndex = i;// 114
-                break;// 115
+        for(int i = 0; i < AbstractDungeon.player.relics.size(); ++i) {
+            if ((AbstractDungeon.player.relics.get(i)).relicId.equals("Golden Idol")) {
+                relicAtIndex = i;
+                break;
             }
         }
 
-        if (AbstractDungeon.player.hasRelic("Bloody Idol")) {// 118
-            AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2), RelicLibrary.getRelic("Circlet").makeCopy());// 119 122
-            logMetricRelicSwap("Forgotten Altar", "Gave Idol", new Circlet(), new GoldenIdol());// 123
+        if (AbstractDungeon.player.hasRelic("Bloody Idol")) {
+            AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2),
+                    (float)(Settings.HEIGHT / 2), RelicLibrary.getRelic("Circlet").makeCopy());
+            logMetricRelicSwap(ID, "Gave Idol", new Circlet(), new GoldenIdol());
         } else {
-            ((AbstractRelic)AbstractDungeon.player.relics.get(relicAtIndex)).onUnequip();// 125
-            AbstractRelic bloodyIdol = RelicLibrary.getRelic("Bloody Idol").makeCopy();// 126
-            bloodyIdol.instantObtain(AbstractDungeon.player, relicAtIndex, false);// 127
-            logMetricRelicSwap("Forgotten Altar", "Gave Idol", new BloodyIdol(), new GoldenIdol());// 128
+            (AbstractDungeon.player.relics.get(relicAtIndex)).onUnequip();
+            AbstractRelic bloodyIdol = RelicLibrary.getRelic("Bloody Idol").makeCopy();
+            bloodyIdol.instantObtain(AbstractDungeon.player, relicAtIndex, false);
+            logMetricRelicSwap(ID, "Gave Idol", new BloodyIdol(), new GoldenIdol());
         }
 
-    }// 131
+    }
 
     static {
-        DIALOG_1 = DESCRIPTIONS[0];
         DIALOG_2 = DESCRIPTIONS[1];
         DIALOG_3 = DESCRIPTIONS[2];
         DIALOG_4 = DESCRIPTIONS[3];
