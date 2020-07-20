@@ -41,9 +41,11 @@ public class BetterAltarEvent extends AbstractImageEvent {
         if (AbstractDungeon.ascensionLevel >= 15) {
             this.maxHpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.12F);
             this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.08F);
+            this.hpGain = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.2F);
         } else {
             this.maxHpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.08F);
             this.hpLoss = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.05F);
+            this.hpGain = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.25F);
         }
 
         if (AbstractDungeon.player.hasRelic("Golden Idol")) {
