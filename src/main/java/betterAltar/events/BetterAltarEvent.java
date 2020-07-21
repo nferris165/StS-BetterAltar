@@ -1,6 +1,7 @@
 package betterAltar.events;
 
 import betterAltar.BetterAltar;
+import betterAltar.potions.AltarPotion;
 import betterAltar.relics.BloodRelic;
 import betterAltar.util.AbstractEventDialog;
 import com.badlogic.gdx.Gdx;
@@ -77,13 +78,13 @@ public class BetterAltarEvent extends AbstractImageEvent {
         }
 
         if(vial){
-            this.EventText.setDialogOption(OPTIONS[0] + this.hpLossVial + OPTIONS[2], new BloodRelic());
+            this.EventText.setDialogOption(OPTIONS[9] + this.hpLossVial + OPTIONS[1], new BloodRelic());
 
         } else{
             this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss2 + OPTIONS[2], new BloodVial());
         }
 
-        this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss3 + OPTIONS[5], new BloodPotion());
+        this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss3 + OPTIONS[5], new AltarPotion());
         this.EventText.setDialogOption(OPTIONS[3], CardLibrary.getCopy("Decay"));
     }
 
@@ -158,8 +159,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
                         break;
                     case 1:
                         if(vial){
-                            AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2),
-                                    (float)(Settings.HEIGHT / 2), new BloodRelic());
+                            this.gainVial();
                             AbstractDungeon.player.damage(new DamageInfo(null, this.hpLossVial));
                             this.damageTaken += this.hpLossVial;
                         }
@@ -255,11 +255,32 @@ public class BetterAltarEvent extends AbstractImageEvent {
             //logMetricRelicSwap(ID, "Gave Idol", new Circlet(), new GoldenIdol());
         } else {
             (AbstractDungeon.player.relics.get(relicAtIndex)).onUnequip();
-            AbstractRelic bloodyIdol = RelicLibrary.getRelic("Bloody Idol").makeCopy();
+            AbstractRelic bloodyIdol = RelicLibrary.getRelic(BloodyIdol.ID).makeCopy();
             bloodyIdol.instantObtain(AbstractDungeon.player, relicAtIndex, false);
             //logMetricRelicSwap(ID, "Gave Idol", new BloodyIdol(), new GoldenIdol());
         }
         this.optionsChosen.add("Gold");
+    }
+
+    private void gainVial(){
+        int relicAtIndex = 0;
+
+        for(int i = 0; i < AbstractDungeon.player.relics.size(); ++i) {
+            if ((AbstractDungeon.player.relics.get(i)).relicId.equals(BloodVial.ID)) {
+                relicAtIndex = i;
+                break;
+            }
+        }
+
+        if (AbstractDungeon.player.hasRelic(BloodRelic.ID)) {
+            AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2),
+                    (float)(Settings.HEIGHT / 2), RelicLibrary.getRelic("Circlet").makeCopy());
+        } else {
+            (AbstractDungeon.player.relics.get(relicAtIndex)).onUnequip();
+            AbstractRelic relic = RelicLibrary.getRelic(BloodRelic.ID).makeCopy();
+            relic.instantObtain(AbstractDungeon.player, relicAtIndex, false);
+        }
+        this.optionsChosen.add("Rotten");
     }
 
     static {

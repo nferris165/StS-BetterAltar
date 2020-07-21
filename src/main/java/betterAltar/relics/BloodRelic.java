@@ -29,12 +29,25 @@ public class BloodRelic extends CustomRelic {
         super(ID, IMG, OUTLINE, RelicTier.SPECIAL, AbstractRelic.LandingSound.CLINK);
 
         this.counter = -1;
-        this.healVal = 4;
+        getHealVal();
     }
 
     @Override
     public String getUpdatedDescription() {
-        return DESCRIPTIONS[0] + healVal + DESCRIPTIONS[1];
+        getHealVal();
+        return DESCRIPTIONS[0] + this.healVal + DESCRIPTIONS[1];
+    }
+
+    @Override
+    public void onVictory() {
+        updateDescription(AbstractDungeon.player.chosenClass);
+    }
+
+    private void getHealVal() {
+        this.healVal = 2;
+        if(CardCrawlGame.dungeon != null){
+            this.healVal += AbstractDungeon.bossCount;
+        }
     }
 
     @Override

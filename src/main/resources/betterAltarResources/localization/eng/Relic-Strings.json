@@ -4,7 +4,7 @@
     "FLAVOR": "The blood moves around as if something alive is moving through it.",
     "DESCRIPTIONS": [
       "At the start of each combat, heal #b",
-      " HP."
+      " HP. (Value increases for each #yBoss slain this run)"
     ]
   }
 }
