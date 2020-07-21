@@ -35,7 +35,6 @@ public class BloodRelic extends CustomRelic {
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0] + healVal + DESCRIPTIONS[1];
-
     }
 
     @Override

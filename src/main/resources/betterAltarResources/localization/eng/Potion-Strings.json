@@ -3,7 +3,8 @@
     "NAME": "Forgotten Blood Potion",
     "DESCRIPTIONS": [
       "Heal for #b",
-      "% of your Max HP."
+      "% of your Max HP. Gain #b",
+      " #yRegen."
     ]
   }
 }
