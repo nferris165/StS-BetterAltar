@@ -76,9 +76,10 @@ public class BetterAltarEvent extends AbstractImageEvent {
         }
 
         if(vial){
-            this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss2 + OPTIONS[2], new BloodVial());
-        } else{
             this.EventText.setDialogOption(OPTIONS[0] + this.hpLossVial + OPTIONS[2], new BloodVial());
+
+        } else{
+            this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss2 + OPTIONS[2], new BloodVial());
         }
 
         this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss3 + OPTIONS[5], new BloodPotion());

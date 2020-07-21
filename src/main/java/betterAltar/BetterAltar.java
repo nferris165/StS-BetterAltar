@@ -9,8 +9,10 @@ import basemod.eventUtil.EventUtils;
 import basemod.interfaces.*;
 import betterAltar.events.BetterAltarEvent;
 import betterAltar.patches.customMetrics;
+import betterAltar.potions.AltarPotion;
 import betterAltar.util.TextureLoader;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
@@ -21,6 +23,7 @@ import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
@@ -58,6 +61,11 @@ public class BetterAltar implements
     private static final String AUDIO_PATH = "betterAltarResources/audio/";
 
     private static final String modID = "betterAltar";
+
+    public static final Color POTION_RED = CardHelper.getColor(76, 25, 43);
+    public static final Color POTION_ALT = CardHelper.getColor(211, 40, 2);
+    public static final Color POTION_BOT = CardHelper.getColor(156, 4, 2);
+
 
 
     //Image Directories
@@ -117,7 +125,7 @@ public class BetterAltar implements
     }
 
     public void receiveEditPotions() {
-        //BaseMod.addPotion(NewPotion.class, SLUMBERING_POTION_RUST, SLUMBERING_TEAL, SLUMBERING_POTION_RUST, NewPotion.POTION_ID, TheSlumbering.Enums.THE_SLUMBERING);
+        BaseMod.addPotion(AltarPotion.class, POTION_ALT, POTION_BOT, POTION_RED, AltarPotion.POTION_ID);
     }
 
     @Override
