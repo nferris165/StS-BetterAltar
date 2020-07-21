@@ -1,6 +1,7 @@
 package betterAltar.events;
 
 import betterAltar.BetterAltar;
+import betterAltar.relics.BloodRelic;
 import betterAltar.util.AbstractEventDialog;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -76,7 +77,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
         }
 
         if(vial){
-            this.EventText.setDialogOption(OPTIONS[0] + this.hpLossVial + OPTIONS[2], new BloodVial());
+            this.EventText.setDialogOption(OPTIONS[0] + this.hpLossVial + OPTIONS[2], new BloodRelic());
 
         } else{
             this.EventText.setDialogOption(OPTIONS[0] + this.hpLoss2 + OPTIONS[2], new BloodVial());
@@ -158,7 +159,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
                     case 1:
                         if(vial){
                             AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2),
-                                    (float)(Settings.HEIGHT / 2), new BloodVial());
+                                    (float)(Settings.HEIGHT / 2), new BloodRelic());
                             AbstractDungeon.player.damage(new DamageInfo(null, this.hpLossVial));
                             this.damageTaken += this.hpLossVial;
                         }

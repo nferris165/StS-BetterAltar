@@ -6,10 +6,12 @@ import basemod.ModPanel;
 import basemod.ReflectionHacks;
 import basemod.eventUtil.AddEventParams;
 import basemod.eventUtil.EventUtils;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import betterAltar.events.BetterAltarEvent;
 import betterAltar.patches.customMetrics;
 import betterAltar.potions.AltarPotion;
+import betterAltar.relics.BloodRelic;
 import betterAltar.util.TextureLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -153,7 +155,7 @@ public class BetterAltar implements
 
     @Override
     public void receiveEditRelics() {
-
+        BaseMod.addRelic(new BloodRelic(), RelicType.SHARED);
     }
 
     @Override
