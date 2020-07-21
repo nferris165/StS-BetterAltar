@@ -27,11 +27,7 @@ public class AltarPotion extends AbstractPotion {
     public AltarPotion() {
         super(NAME, POTION_ID, PotionRarity.PLACEHOLDER, PotionSize.HEART, PotionColor.POWER);
 
-        potency = getPotency();
         isThrown = false;
-        this.regen = potency / 3;
-        tips.add(new PowerTip(name, description));
-
     }
 
     @Override
@@ -58,7 +54,9 @@ public class AltarPotion extends AbstractPotion {
     }
 
     @Override
-    public int getPotency(final int potency) {
-        return 15;
+    public int getPotency(final int ascension) {
+        int pot = 15;
+        this.regen = pot / 3;
+        return pot;
     }
 }
