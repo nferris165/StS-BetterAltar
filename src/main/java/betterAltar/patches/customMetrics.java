@@ -115,7 +115,7 @@ public class customMetrics implements Runnable {
         //addData("campfire_upgraded", Integer.valueOf(CardCrawlGame.metricData.campfire_upgraded));
         //addData("purchased_purges", Integer.valueOf(CardCrawlGame.metricData.purchased_purges));
         //addData("potions_floor_spawned", CardCrawlGame.metricData.potions_floor_spawned);
-        //addData("potions_floor_usage", CardCrawlGame.metricData.potions_floor_usage);
+        addData("potions_floor_usage", CardCrawlGame.metricData.potions_floor_usage);
         //addData("current_hp_per_floor", CardCrawlGame.metricData.current_hp_per_floor);
         //addData("max_hp_per_floor", CardCrawlGame.metricData.max_hp_per_floor);
         //addData("gold_per_floor", CardCrawlGame.metricData.gold_per_floor);
