@@ -4,7 +4,6 @@ This mod is meant to redesign the Event **"Forgotten Altar"** into something mor
 
 ## Effects
 
-The Event **"Knowing Skull"** has new options allowing the player to leave before entering and receive a small bonus. If the player chooses to engage with the skull, there are new options available for purchase.
 
 
 ## Design Goals

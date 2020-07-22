@@ -116,7 +116,7 @@ public class customMetrics implements Runnable {
         //addData("purchased_purges", Integer.valueOf(CardCrawlGame.metricData.purchased_purges));
         //addData("potions_floor_spawned", CardCrawlGame.metricData.potions_floor_spawned);
         addData("potions_floor_usage", CardCrawlGame.metricData.potions_floor_usage);
-        //addData("current_hp_per_floor", CardCrawlGame.metricData.current_hp_per_floor);
+        addData("current_hp_per_floor", CardCrawlGame.metricData.current_hp_per_floor);
         //addData("max_hp_per_floor", CardCrawlGame.metricData.max_hp_per_floor);
         //addData("gold_per_floor", CardCrawlGame.metricData.gold_per_floor);
         //addData("path_per_floor", CardCrawlGame.metricData.path_per_floor);
@@ -136,7 +136,9 @@ public class customMetrics implements Runnable {
 
 
         //addData("event_choices", CardCrawlGame.metricData.event_choices);
-        addData("heal_limit", BetterAltar.optionLimit);
+        addData("heal_limit", BetterAltar.healthLimit);
+        //Document document = builder.parse(new File("pom.xml"));
+        //addData("version", pom.xml.version);
     }
 
     private HashMap getDeck(){

@@ -51,8 +51,8 @@ public class BetterAltar implements
 
     //mod settings
     public static Properties defaultSettings = new Properties();
-    public static final String option_limit_settings = "ascensionLimit";
-    public static boolean optionLimit = false;
+    public static final String health_limit_settings = "noHealthLimit";
+    public static boolean healthLimit = false;
 
     private static final String MODNAME = "Better Altar";
     private static final String AUTHOR = "Nichilas";
@@ -112,11 +112,11 @@ public class BetterAltar implements
         BaseMod.subscribe(this);
 
         logger.info("Adding mod settings");
-        defaultSettings.setProperty(option_limit_settings, "FALSE");
+        defaultSettings.setProperty(health_limit_settings, "FALSE");
         try {
             SpireConfig config = new SpireConfig("betterAltar", "betterAltarConfig", defaultSettings);
             config.load();
-            optionLimit = config.getBool(option_limit_settings);
+            healthLimit = config.getBool(health_limit_settings);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,17 +194,17 @@ public class BetterAltar implements
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
         ModPanel settingsPanel = new ModPanel();
 
-        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Disables Dispel option.",
+        ModLabeledToggleButton ascLimitButton = new ModLabeledToggleButton("Remove HP minimum to encounter event.",
                 350.0f, 750.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
-                optionLimit,
+                healthLimit,
                 settingsPanel,
                 (label) -> {},
                 (button) -> {
 
-                    optionLimit = button.enabled;
+                    healthLimit = button.enabled;
                     try {
                         SpireConfig config = new SpireConfig("betterAltar", "betterAltarConfig", defaultSettings);
-                        config.setBool(option_limit_settings, optionLimit);
+                        config.setBool(health_limit_settings, healthLimit);
                         config.save();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -220,9 +220,9 @@ public class BetterAltar implements
                 .eventType(EventUtils.EventType.SHRINE).bonusCondition(
                         () -> {
                             if(AbstractDungeon.ascensionLevel >= 15){
-                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.25F;
+                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.35F;
                             } else{
-                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.3F;
+                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.4F;
                             }
                         }
                 ).create());
