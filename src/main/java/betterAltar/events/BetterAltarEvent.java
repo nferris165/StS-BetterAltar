@@ -48,7 +48,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
     private boolean curse, idol, vial;
     private int damageTaken;
     private ArrayList<AbstractCard> cardsGained;
-    private ArrayList<String> optionsChosen;
+    private String optionsChosen;
 
     public BetterAltarEvent() {
         super(NAME, DESCRIPTIONS[0], IMG);
@@ -60,7 +60,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
         this.hpLossVial = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.05F);
         this.idol = AbstractDungeon.player.hasRelic(GoldenIdol.ID);
         this.vial = AbstractDungeon.player.hasRelic(BloodVial.ID);
-        this.optionsChosen = new ArrayList<>();
+        this.optionsChosen = "";
         this.cardsGained = new ArrayList<>();
 
         if(AbstractDungeon.ascensionLevel >= 15) {
@@ -155,7 +155,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
                             this.damageTaken += this.hpLoss1;
                         }
 
-                        this.optionsChosen.add("Idol ");
+                        this.optionsChosen += "Idol ";
                         CardCrawlGame.sound.play("BLOOD_SWISH");
                         //logMetricDamageAndMaxHPGain(ID, "Sacrifice", this.hpLoss, 5);
                         break;
@@ -172,14 +172,14 @@ public class BetterAltarEvent extends AbstractImageEvent {
                             this.damageTaken += this.hpLoss2;
                         }
 
-                        this.optionsChosen.add("Vial ");
+                        this.optionsChosen += "Vial ";
                         CardCrawlGame.sound.play("BLOOD_SWISH");
                         break;
                     case 2:
                         AbstractDungeon.effectList.add(new ObtainPotionEffect(new AltarPotion()));
                         AbstractDungeon.player.damage(new DamageInfo(null, this.hpLoss3));
                         this.damageTaken += this.hpLoss3;
-                        this.optionsChosen.add("Potion ");
+                        this.optionsChosen += "Potion ";
                         CardCrawlGame.sound.play("BLOOD_SWISH");
                         //logMetricObtainCardAndRelic(ID, "Desecrate", curse, relic);
                         break;
@@ -189,8 +189,8 @@ public class BetterAltarEvent extends AbstractImageEvent {
                             CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.HIGH, ScreenShake.ShakeDur.MED, true);
                             AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(new Decay(), (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2)));
                             this.cardsGained.add(new Decay());
-                            this.optionsChosen.add("Curse");
-                            //logMetricObtainCardAndRelic(ID, "Defy", curse, relic);
+                            this.optionsChosen += "Defy";
+                            logMetricObtainCardAndDamage(ID, this.optionsChosen, new Decay(), this.damageTaken);
                         }
                         break;
                     default:
@@ -277,7 +277,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
             bloodyIdol.instantObtain(AbstractDungeon.player, relicAtIndex, false);
             //logMetricRelicSwap(ID, "Gave Idol", new BloodyIdol(), new GoldenIdol());
         }
-        this.optionsChosen.add("Gold");
+        this.optionsChosen += "Gold";
     }
 
     private void gainVial(){
@@ -298,7 +298,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
             AbstractRelic relic = RelicLibrary.getRelic(BloodRelic.ID).makeCopy();
             relic.instantObtain(AbstractDungeon.player, relicAtIndex, false);
         }
-        this.optionsChosen.add("Rotten");
+        this.optionsChosen += "Rotten";
     }
 
     static {
