@@ -19,7 +19,6 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.potions.BloodPotion;
 import com.megacrit.cardcrawl.relics.*;
 import com.megacrit.cardcrawl.vfx.ObtainPotionEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
@@ -39,9 +38,12 @@ public class BetterAltarEvent extends AbstractImageEvent {
     public AbstractEventDialog EventText = new AbstractEventDialog();
 
     private static final String DIALOG_2;
+    private static final String DIALOG_2_ALT;
     private static final String DIALOG_3;
+    private static final String DIALOG_3_ALT;
     private static final String DIALOG_4;
     private static final String DIALOG_5;
+    private static final String DIALOG_5_ALT;
     private int hpLoss1, hpLoss2, hpLoss3, hpLossIdol, hpLossVial;
     private boolean curse, idol, vial;
     private int damageTaken;
@@ -174,7 +176,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
                         CardCrawlGame.sound.play("BLOOD_SWISH");
                         break;
                     case 2:
-                        AbstractDungeon.effectList.add(new ObtainPotionEffect(new BloodPotion()));
+                        AbstractDungeon.effectList.add(new ObtainPotionEffect(new AltarPotion()));
                         AbstractDungeon.player.damage(new DamageInfo(null, this.hpLoss3));
                         this.damageTaken += this.hpLoss3;
                         this.optionsChosen.add("Potion ");
@@ -194,7 +196,6 @@ public class BetterAltarEvent extends AbstractImageEvent {
                     default:
                         break;
                 }
-                curse = false;
                 updateDialogs(buttonPressed);
                 break;
             case 99:
@@ -209,22 +210,39 @@ public class BetterAltarEvent extends AbstractImageEvent {
     private void updateDialogs(int option){
         switch(option){
             case 0:
-                this.EventText.updateBodyText(DIALOG_2);
+                curse = false;
+                if(idol){
+                    this.EventText.updateBodyText(DIALOG_2_ALT);
+                }
+                else{
+                    this.EventText.updateBodyText(DIALOG_2);
+                }
                 this.EventText.updateDialogOption(option, OPTIONS[6], true);
                 this.EventText.updateDialogOption(3, OPTIONS[7]);
                 break;
             case 1:
-                this.EventText.updateBodyText(DIALOG_3);
+                curse = false;
+                if(vial){
+                    this.EventText.updateBodyText(DIALOG_3_ALT);
+                }
+                else{
+                    this.EventText.updateBodyText(DIALOG_3);
+                }
                 this.EventText.updateDialogOption(option, OPTIONS[6], true);
                 this.EventText.updateDialogOption(3, OPTIONS[7]);
                 break;
             case 2:
-                this.EventText.updateBodyText(DIALOG_5);
+                curse = false;
+                this.EventText.updateBodyText(DIALOG_4);
                 this.EventText.updateDialogOption(option, OPTIONS[6], true);
                 this.EventText.updateDialogOption(3, OPTIONS[7]);
                 break;
             case 3:
-                this.EventText.updateBodyText(DIALOG_4);
+                if(curse){
+                    this.EventText.updateBodyText(DIALOG_5);
+                } else{
+                    this.EventText.updateBodyText(DIALOG_5_ALT);
+                }
                 this.EventText.updateDialogOption(0, OPTIONS[4]);
                 this.EventText.clearRemainingOptions();
                 this.screenNum = 99;
@@ -288,5 +306,8 @@ public class BetterAltarEvent extends AbstractImageEvent {
         DIALOG_3 = DESCRIPTIONS[2];
         DIALOG_4 = DESCRIPTIONS[3];
         DIALOG_5 = DESCRIPTIONS[4];
+        DIALOG_2_ALT = DESCRIPTIONS[5];
+        DIALOG_3_ALT = DESCRIPTIONS[6];
+        DIALOG_5_ALT = DESCRIPTIONS[7];
     }
 }
