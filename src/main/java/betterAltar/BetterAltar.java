@@ -128,7 +128,7 @@ public class BetterAltar implements
     }
 
     public void receiveEditPotions() {
-        BaseMod.addPotion(AltarPotion.class, POTION_ALT, POTION_BOT, POTION_RED, AltarPotion.POTION_ID);
+        BaseMod.addPotion(AltarPotion.class, POTION_ALT, POTION_BOT, POTION_RED, AltarPotion.POTION_ID, null);
     }
 
     @Override
