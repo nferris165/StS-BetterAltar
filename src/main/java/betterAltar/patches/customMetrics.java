@@ -73,7 +73,7 @@ public class customMetrics implements Runnable {
     private void gatherAllData()
     {
         //Boolean death = AbstractDungeon.deathScreen.isVictory;
-        Boolean death = AbstractDungeon.getCurrRoom() instanceof VictoryRoom;
+        boolean death = !(AbstractDungeon.getCurrRoom() instanceof VictoryRoom);
         addData("play_id", UUID.randomUUID().toString());
         addData("build_version", CardCrawlGame.TRUE_VERSION_NUM);
         addData("seed_played", Settings.seed.toString());
@@ -100,7 +100,7 @@ public class customMetrics implements Runnable {
 
         //addData("is_beta", Boolean.valueOf(Settings.isBeta));
         //addData("is_prod", Boolean.valueOf(Settings.isDemo));
-        addData("victory", Boolean.valueOf(!death));
+        addData("victory", !death);
         addData("floor_reached", Integer.valueOf(AbstractDungeon.floorNum));
         addData("score", Integer.valueOf(DeathScreen.calcScore(!death)));
         this.lastPlaytimeEnd = (System.currentTimeMillis() / 1000L);
@@ -116,7 +116,7 @@ public class customMetrics implements Runnable {
         //addData("purchased_purges", Integer.valueOf(CardCrawlGame.metricData.purchased_purges));
         //addData("potions_floor_spawned", CardCrawlGame.metricData.potions_floor_spawned);
         addData("potions_floor_usage", CardCrawlGame.metricData.potions_floor_usage);
-        addData("current_hp_per_floor", CardCrawlGame.metricData.current_hp_per_floor);
+        //addData("current_hp_per_floor", CardCrawlGame.metricData.current_hp_per_floor);
         //addData("max_hp_per_floor", CardCrawlGame.metricData.max_hp_per_floor);
         //addData("gold_per_floor", CardCrawlGame.metricData.gold_per_floor);
         //addData("path_per_floor", CardCrawlGame.metricData.path_per_floor);

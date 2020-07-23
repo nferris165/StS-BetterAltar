@@ -45,7 +45,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
     private static final String DIALOG_5_ALT;
     private int hpLoss1, hpLoss2, hpLoss3, hpLossIdol, hpLossVial;
     private boolean curse, idol, vial;
-    private int damageTaken;
+    private int damageTaken, startHP, endHP;
     private ArrayList<String> relicsGained, relicsLost, potionsGained;
     private String optionsChosen;
 
@@ -54,6 +54,7 @@ public class BetterAltarEvent extends AbstractImageEvent {
         this.EventText.loadImage(IMG);
 
         this.curse = true;
+        this.startHP = AbstractDungeon.player.currentHealth;
         this.damageTaken = 0;
         this.hpLossIdol = 1;
         this.hpLossVial = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.05F);
@@ -194,8 +195,9 @@ public class BetterAltarEvent extends AbstractImageEvent {
                             logMetricObtainCardAndDamage(ID, this.optionsChosen, new Decay(), this.damageTaken);
                         }
                         else{
+                            this.endHP = AbstractDungeon.player.currentHealth;
                             logMetric(ID, this.optionsChosen, null, null, null, null, this.relicsGained,
-                                    this.potionsGained, this.relicsLost, this.damageTaken, 0, 0, 0, 0, 0);
+                                    this.potionsGained, this.relicsLost, this.damageTaken, 0, this.endHP, this.startHP, 0, 0);
                         }
                         break;
                     default:
