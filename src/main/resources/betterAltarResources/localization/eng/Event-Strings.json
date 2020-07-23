@@ -23,5 +23,19 @@
       "[Offer: Golden Idol] #rLose #rGolden #rIdol. #rLose #r",
       "[Offer: Blood Vial] #rLose #rBlood #rVial. #rLose #r"
     ]
+  },
+
+  "betterAltar:Vampires": {
+    "NAME": "Vampires(?)",
+    "DESCRIPTIONS": [
+      "The pale figures gasp as you take out the #pVial. NL ~\"The~ ~false~ ~one's~ ~blood...~ ~the~ ~false~ ~one's~ ~blood!~ @THE@ @FALSE@ @ONE'S@ @BLOOD!\"@ NL The tall one speaks to you. \"Hand us this #p~vile~ #p~drink,~ that we may dispose of it forever.\" NL You hand over the #pvial, and she immediately turns to her companions. NL \"Cleanse them.\" NL You feel a sharp pain on the back of your neck, as your vision immediately ~warps~ and fades to darkness. NL NL You wake up some time later, alone. An intense ~hunger~ passes through your belly. You #rmust #rfeed."    ],
+    "OPTIONS": [
+      "[Accept] #gRemove #gall Strikes. #gReceive #g5 Bites. #rLose #r",
+      " #rMax #rHP.",
+      "[Refuse]",
+      "[Lose ",
+      "] #gRemove #gall Strikes. #gReceive #g5 Bites.",
+      "[Leave]"
+    ]
   }
 }

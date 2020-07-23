@@ -19,7 +19,7 @@ public class PotionMetricPatch {
             method = "updateInput"
     )
 
-    public static class EventSwapPatch {
+    public static class FloorPatch {
         @SpireInsertPatch(
                 locator=Locator.class
         )
