@@ -25,6 +25,7 @@ import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
@@ -216,16 +217,23 @@ public class BetterAltar implements
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
 
         //events
-        BaseMod.addEvent(new AddEventParams.Builder(BetterAltarEvent.ID, BetterAltarEvent.class)
-                .eventType(EventUtils.EventType.SHRINE).bonusCondition(
-                        () -> {
-                            if(AbstractDungeon.ascensionLevel >= 15){
-                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.35F;
-                            } else{
-                                return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.4F;
+        if(healthLimit){
+            BaseMod.addEvent(new AddEventParams.Builder(BetterAltarEvent.ID, BetterAltarEvent.class).dungeonID(TheCity.ID)
+                    .eventType(EventUtils.EventType.NORMAL).create());
+        }
+        else{
+            BaseMod.addEvent(new AddEventParams.Builder(BetterAltarEvent.ID, BetterAltarEvent.class).dungeonID(TheCity.ID)
+                    .eventType(EventUtils.EventType.NORMAL).bonusCondition(
+                            () -> {
+                                if(AbstractDungeon.ascensionLevel >= 15){
+                                    return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.35F;
+                                } else{
+                                    return AbstractDungeon.player.currentHealth >= AbstractDungeon.player.maxHealth * 0.4F;
+                                }
                             }
-                        }
-                ).create());
+                    ).create());
+        }
+
 
         //audio
         loadAudio();
