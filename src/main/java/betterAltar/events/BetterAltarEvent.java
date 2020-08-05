@@ -66,13 +66,13 @@ public class BetterAltarEvent extends AbstractImageEvent {
         this.relicsLost = new ArrayList<>();
 
         if(AbstractDungeon.ascensionLevel >= 15) {
-            this.hpLoss1 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.50F);
-            this.hpLoss2 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.30F);
-            this.hpLoss3 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.35F);
+            this.hpLoss1 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.55F);
+            this.hpLoss2 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.31F);
+            this.hpLoss3 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.29F);
         } else {
-            this.hpLoss1 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.45F);
-            this.hpLoss2 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.25F);
-            this.hpLoss3 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.30F);
+            this.hpLoss1 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.50F);
+            this.hpLoss2 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.26F);
+            this.hpLoss3 = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.24F);
         }
 
         if(idol) {
