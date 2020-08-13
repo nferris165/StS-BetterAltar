@@ -44,7 +44,7 @@ public class BloodRelic extends CustomRelic {
     }
 
     private void getHealVal() {
-        this.healVal = 2;
+        this.healVal = 3;
         if(CardCrawlGame.dungeon != null){
             this.healVal += AbstractDungeon.bossCount;
         }
