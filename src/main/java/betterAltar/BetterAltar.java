@@ -9,7 +9,6 @@ import basemod.eventUtil.EventUtils;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import betterAltar.events.BetterAltarEvent;
-import betterAltar.patches.customMetrics;
 import betterAltar.potions.AltarPotion;
 import betterAltar.relics.BloodRelic;
 import betterAltar.util.TextureLoader;
@@ -45,7 +44,6 @@ public class BetterAltar implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
-        PostDeathSubscriber,
         PostInitializeSubscriber{
 
     public static final Logger logger = LogManager.getLogger(BetterAltar.class.getName());
@@ -237,14 +235,5 @@ public class BetterAltar implements
 
         //audio
         loadAudio();
-    }
-
-    @Override
-    public void receivePostDeath() {
-        customMetrics metrics = new customMetrics();
-
-        Thread t = new Thread(metrics);
-        t.setName("Metrics");
-        t.start();
     }
 }
