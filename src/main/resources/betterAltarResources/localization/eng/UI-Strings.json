@@ -1,3 +1,8 @@
 {
-
+  "betterAltar:ConfigMenuText": {
+    "TEXT": [
+      "Remove HP minimum to encounter event.",
+      "Disables the 'Lucky Customer' mechanic."
+    ]
+  }
 }
