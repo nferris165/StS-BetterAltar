@@ -1,0 +1,10 @@
+{
+  "betterAltar:AltarPotion": {
+    "NAME": "被遗忘的鲜血药水",
+    "DESCRIPTIONS": [
+      "回复最大生命值的 #b",
+      "% 。获得 #b",
+      " 层 #y复生 。"
+    ]
+  }
+}
